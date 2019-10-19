@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: 86f2fb78d2da3354f8c48eafed242467
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - emptyTile: {fileID: 642924141094320408, guid: 010d0431e9c75e54fa3c4dabe6856472,
+      type: 3}
+  - meleeUnitDire: {fileID: 2508403647418421125, guid: e31cd9f1124661e46917a4ac1f57ab1b,
+      type: 3}
+  - meleeUnitRadient: {fileID: 3706051057534320450, guid: c7c2bb22064855b479e23342a2a85d47,
+      type: 3}
+  - rangedUnitDire: {fileID: 2328537022208320155, guid: 3b173150c1ef7274bb576e98ee77ed22,
+      type: 3}
+  - rangedUnitRadient: {fileID: 1031766351153137499, guid: 1e3e4218bb78b3349ad1fc121c1e8c58,
+      type: 3}
+  - wizardUnitNeutral: {fileID: 2150757368014116153, guid: 1421b09999f59da4eab433a3996619e1,
+      type: 3}
+  - factoryBuildingDire: {fileID: 4218565398666364092, guid: 5b63cb56e77b9664097d8c744be1ed33,
+      type: 3}
+  - factoryBuildingRadient: {fileID: 5544994485976577422, guid: f5457cecac90e674c8be8443021186ca,
+      type: 3}
+  - resourceBuildingDire: {fileID: 2655690887917207420, guid: 76a3acc8c0fe9094b9e6bcc4d75261d7,
+      type: 3}
+  - resourceBuildingRadient: {fileID: 8118089264614353584, guid: 112c1af6873f3d1498be3e87178ed0d4,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
