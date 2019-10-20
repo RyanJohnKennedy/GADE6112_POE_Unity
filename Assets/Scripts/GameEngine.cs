@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameEngine : MonoBehaviour
 {
     int gameTick;
+    bool runGame = false;
+    public Text txtPausePlay;
 
     //Variables that can be adjusted by the user to change the map size
     const int mapHeight = 20;
@@ -46,19 +49,40 @@ public class GameEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameTick == 20)
+        if (runGame)
         {
-            GameLogic();
-            InisialiseMap();
-            m.PlaceUnits();
-            m.PlaceBuildings();
-            PlaceGameObjects();
+            if (gameTick == 20)
+            {
+                GameLogic();
+                InisialiseMap();
+                m.PlaceUnits();
+                m.PlaceBuildings();
+                PlaceGameObjects();
 
-            gameTick = 0;
+                gameTick = 0;
+            }
+            else
+            {
+                gameTick++;
+            }
         }
         else
         {
-            gameTick++;
+            gameTick = 0;
+        }
+    }
+
+    public void PlayPause()
+    {
+        if (runGame == false)
+        {
+            runGame = true;
+            txtPausePlay.text = "Pause";
+        }
+        else
+        {
+            runGame = false;
+            txtPausePlay.text = "Unpause";
         }
     }
 
