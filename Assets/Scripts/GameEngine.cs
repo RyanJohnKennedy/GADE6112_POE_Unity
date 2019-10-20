@@ -7,7 +7,18 @@ public class GameEngine : MonoBehaviour
 {
     int gameTick;
     bool runGame = false;
+
+    //All texts for the UI
     public Text txtPausePlay;
+    public Text txtRound;
+    //Radient texts
+    public Text txtRadientResourseLeft;
+    public Text txtRadientResourseGathered;
+    public Text txtRadientUnits;
+    //Dire texts
+    public Text txtDireResourseLeft;
+    public Text txtDireResourseGathered;
+    public Text txtDireUnits;
 
     //Variables that can be adjusted by the user to change the map size
     const int mapHeight = 20;
@@ -39,6 +50,7 @@ public class GameEngine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Display();
         m.GenerateBattlefeild();
         InisialiseMap();
         m.PlaceUnits();
@@ -88,6 +100,8 @@ public class GameEngine : MonoBehaviour
 
     private void GameLogic()
     {
+        Display();
+
         foreach (ResourceBuilding RB in m.mines)
         {
             if (RB.FactionType == Faction.Dire)
@@ -311,5 +325,12 @@ public class GameEngine : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Display()
+    {
+        txtRound.text = "Round: " + m.round;
+        
+
     }
 }
