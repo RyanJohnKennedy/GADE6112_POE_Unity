@@ -42,8 +42,6 @@ public class Map : MonoBehaviour
     public List<MeleeUnit> meleeUnits = new List<MeleeUnit>();
     public List<WizardUnit> wizardUnits = new List<WizardUnit>();
 
-    //private Unit[,] unitMap;
-    //private Building[,] buildingMap;
     public Tiles[,] mapTiles;
 
     private int unitNum;
@@ -63,8 +61,6 @@ public class Map : MonoBehaviour
         mapWidth = mWidth;
 
         mapTiles = new Tiles[mapWidth, mapHeight];
-        //buildingMap = new Building[mapWidth, mapHeight];
-        //unitMap = new Unit[mapWidth, mapHeight];
     }
 
     //Creates the unit objects and randomises thier x and y positions
@@ -234,28 +230,6 @@ public class Map : MonoBehaviour
 
     public void PlaceBuildings()
     {
-        //for (int i = 0; i < mapWidth; i++)
-        //{
-        //    for (int j = 0; j < mapHeight; j++)
-        //    {
-        //        buildingMap[i, j] = null;
-        //    }
-        //}
-
-        //foreach (Building b in buildings)
-        //{
-        //    if (b is FactoryBuilding)
-        //    {
-        //        FactoryBuilding build = (FactoryBuilding)b;
-        //        buildingMap[build.PosY, build.PosX] = b;
-        //    }
-        //    else if (b is ResourceBuilding)
-        //    {
-        //        ResourceBuilding build = (ResourceBuilding)b;
-        //        buildingMap[build.PosY, build.PosX] = b;
-        //    }
-        //}
-
         foreach (FactoryBuilding b in factories)
         {
             if (b.FactionType == Faction.Dire)
