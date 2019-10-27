@@ -4,26 +4,22 @@ using UnityEngine;
 
 public abstract class Unit
 {
-    protected string name;
     protected int posX, posY;
     protected int health;
     protected int maxHealth;
     protected int speed;
     protected int attack, attackRange;
-    protected string symbol;
     protected Faction factionType;
     protected bool isAttacking;
 
-    public Unit(string n, int x, int y, int hp, int sp, int att, int attRange, string sym, Faction faction, bool isAtt)
+    public Unit(int x, int y, int hp, int sp, int att, int attRange, Faction faction, bool isAtt)
     {
-        name = n;
         posX = x;
         posY = y;
         health = hp;
         speed = sp;
         attack = att;
         attackRange = attRange;
-        symbol = sym;
         factionType = faction;
         isAttacking = isAtt;
 
@@ -39,6 +35,4 @@ public abstract class Unit
     public abstract Unit ClosestEnemy();
 
     public abstract bool Death();
-
-    public abstract override string ToString();
 }

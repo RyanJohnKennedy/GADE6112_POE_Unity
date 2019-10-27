@@ -8,6 +8,7 @@ public class GameEngine : MonoBehaviour
     int gameTick;
     bool runGame = false;
 
+    [Header("UI Texts")]
     //All texts for the UI
     public Text txtPausePlay;
     public Text txtRound;
@@ -43,6 +44,7 @@ public class GameEngine : MonoBehaviour
     //Map object
     Map m = new Map(unitNum, buildingNum, mapHeight, mapWidth);
 
+    [Header("Game Objects")]
     //GameObjects
     public GameObject emptyTile;
     public GameObject meleeUnitDire;
@@ -104,7 +106,8 @@ public class GameEngine : MonoBehaviour
             gameTick = 0;
         }
     }
-
+    
+    //Button methods
     public void PlayPause()
     {
         if (runGame == false)
@@ -117,6 +120,11 @@ public class GameEngine : MonoBehaviour
             runGame = false;
             txtPausePlay.text = "Unpause";
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void GameLogic()
@@ -269,11 +277,11 @@ public class GameEngine : MonoBehaviour
 
             if (dire > radiant)
             {
-                txtWinText.text = "Dire Wins!";
+                txtWinText.text = "Dire Wins on round " + m.round + "!";
             }
             else
             {
-                txtWinText.text = "Radient Wins!";
+                txtWinText.text = "Radient Wins on round " + m.round + "!";
             }
         }
     }
@@ -379,6 +387,8 @@ public class GameEngine : MonoBehaviour
             Destroy(g);
         }
 
+        //Image[] imgs = Image.FindGameObjectsWithTag("health");
+
         for (int x = 0; x < mapWidth; x++)
         {
             for (int z = 0; z < mapHeight; z++)
@@ -389,39 +399,39 @@ public class GameEngine : MonoBehaviour
                 }
                 else if (m.mapTiles[x, z] == Tiles.meleeUnitDire)
                 {
-                    Instantiate(meleeUnitDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(meleeUnitDire, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.meleeUnitRadient)
                 {
-                    Instantiate(meleeUnitRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(meleeUnitRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.rangedUnitDire)
                 {
-                    Instantiate(rangedUnitDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(rangedUnitDire, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.rangedUnitRadient)
                 {
-                    Instantiate(rangedUnitRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(rangedUnitRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.wizardUnitNeutral)
                 {
-                    Instantiate(wizardUnitNeutral, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(wizardUnitNeutral, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.factoryBuildingDire)
                 {
-                    Instantiate(factoryBuildingDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(factoryBuildingDire, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.factoryBuildingRadient)
                 {
-                    Instantiate(factoryBuildingRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(factoryBuildingRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.resourceBuildingDire)
                 {
-                    Instantiate(resourceBuildingDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(resourceBuildingDire, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
                 else if (m.mapTiles[x, z] == Tiles.resourceBuildingRadient)
                 {
-                    Instantiate(resourceBuildingRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    GameObject GO = Instantiate(resourceBuildingRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
                 }
             }
         }

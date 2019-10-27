@@ -81,10 +81,10 @@ public class Map : MonoBehaviour
                 unitName = "Melee";
             }
 
-            FactoryBuilding factory = new FactoryBuilding(0, 0, 100, "|^|", Faction.Dire, Random.Range(3, 10), unitName, Random.Range(50, 71));
+            FactoryBuilding factory = new FactoryBuilding(0, 0, 100, Faction.Dire, Random.Range(3, 10), unitName, Random.Range(50, 71));
             factories.Add(factory);
 
-            ResourceBuilding mine = new ResourceBuilding(0, 0, 100, "|V|", Faction.Dire, Random.Range(3, 10), ResourceType.Gold);
+            ResourceBuilding mine = new ResourceBuilding(0, 0, 100, Faction.Dire, Random.Range(3, 10), ResourceType.Gold);
             mines.Add(mine);
         }
 
@@ -102,16 +102,16 @@ public class Map : MonoBehaviour
                 unitName = "Melee";
             }
 
-            FactoryBuilding factory = new FactoryBuilding(0, 0, 100, "|^|", Faction.Radient, Random.Range(3, 10), unitName, Random.Range(50, 71));
+            FactoryBuilding factory = new FactoryBuilding(0, 0, 100, Faction.Radient, Random.Range(3, 10), unitName, Random.Range(50, 71));
             factories.Add(factory);
 
-            ResourceBuilding mine = new ResourceBuilding(0, 0, 100, "|V|", Faction.Radient, Random.Range(3, 10), ResourceType.Gold);
+            ResourceBuilding mine = new ResourceBuilding(0, 0, 100, Faction.Radient, Random.Range(3, 10), ResourceType.Gold);
             mines.Add(mine);
         }
 
         for (int i = 0; i < (buildingNum * 2); i++)
         {
-            WizardUnit wizard = new WizardUnit("Wizard", 0, 0, Faction.Neutral, 20, 2, 3, 1, "^", false);
+            WizardUnit wizard = new WizardUnit(0, 0, Faction.Neutral, 20, 2, 3, 1, false);
 
             wizard.MapHeight = mapHeight;
             wizard.MapWidth = mapWidth;
@@ -135,8 +135,6 @@ public class Map : MonoBehaviour
                 u.PosX = xPos;
                 u.PosY = yPos;
             }
-
-            //buildingMap[u.PosY, u.PosX] = (Building)u;
             buildings.Add(u);
 
             u.SpawnPointY = u.PosY;

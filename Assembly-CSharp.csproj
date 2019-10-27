@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\CameraZoom.cs" />
     <Compile Include="Assets\Scripts\FactoryBuilding.cs" />
     <Compile Include="Assets\Scripts\GameEngine.cs" />
+    <Compile Include="Assets\Scripts\HealthBarController.cs" />
     <Compile Include="Assets\Scripts\Map.cs" />
     <Compile Include="Assets\Scripts\MeleeUnit.cs" />
     <Compile Include="Assets\Scripts\RangedUnit.cs" />

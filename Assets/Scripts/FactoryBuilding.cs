@@ -22,9 +22,9 @@ public class FactoryBuilding : Building
         set { base.health = value; }
     }
 
-    public string Symbol
+    public int MaxHealth
     {
-        get { return base.symbol; }
+        get { return base.maxHealth; }
     }
 
     public Faction FactionType
@@ -67,8 +67,8 @@ public class FactoryBuilding : Building
     private string unitType;
     private int spawnPointX, spawnPointY;
 
-    public FactoryBuilding(int x, int y, int hp, string sym, Faction faction, int sSpeed, string uType, int sCost)
-        : base(x, y, hp, sym, faction)
+    public FactoryBuilding(int x, int y, int hp, Faction faction, int sSpeed, string uType, int sCost)
+        : base(x, y, hp, faction)
     {
         spawnSpeed = sSpeed;
         unitType = uType;
@@ -81,12 +81,12 @@ public class FactoryBuilding : Building
     {
         if (unitType == "Melee")
         {
-            MeleeUnit knight = new MeleeUnit("Knight", SpawnPointX, SpawnPointY, factionType, 40, 1, 5, 1, "/", false);
+            MeleeUnit knight = new MeleeUnit(SpawnPointX, SpawnPointY, FactionType, 40, 1, 5, 1, false);
             return knight;
         }
         else
         {
-            RangedUnit archer = new RangedUnit("Archer", SpawnPointX, SpawnPointY, FactionType, 30, 1, 3, 3, "{|", false);
+            RangedUnit archer = new RangedUnit(SpawnPointX, SpawnPointY, FactionType, 25, 1, 2, 3, false);
             return archer;
         }
     }
@@ -102,15 +102,5 @@ public class FactoryBuilding : Building
         {
             return false;
         }
-    }
-
-    //The info of the building
-    public override string ToString()
-    {
-        return "Barracks: X: " + PosX + " Y: " + PosY
-            + "\nHP: " + Health
-            + "\nFaction " + FactionType
-            + "\nSpawn speed: " + SpawnSpeed
-            + "\nUnit spawning: " + unitType;
     }
 }

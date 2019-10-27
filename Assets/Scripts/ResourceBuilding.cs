@@ -22,9 +22,9 @@ public class ResourceBuilding : Building
         set { base.health = value; }
     }
 
-    public string Symbol
+    public int MaxHealth
     {
-        get { return base.symbol; }
+        get { return base.maxHealth; }
     }
 
     public Faction FactionType
@@ -48,8 +48,8 @@ public class ResourceBuilding : Building
     private int resourcesRemaining = 1000;
 
 
-    public ResourceBuilding(int x, int y, int hp, string sym, Faction faction, int resPerRound, ResourceType res)
-        : base(x, y, hp, sym, faction)
+    public ResourceBuilding(int x, int y, int hp, Faction faction, int resPerRound, ResourceType res)
+        : base(x, y, hp, faction)
     {
         resource = res;
         resourcesPerRound = resPerRound;
@@ -85,15 +85,5 @@ public class ResourceBuilding : Building
         {
             return false;
         }
-    }
-
-    //The info of the building
-    public override string ToString()
-    {
-        return "Mine: X: " + PosX + " Y: " + PosY
-            + "\nHP: " + Health
-            + "\nFaction " + FactionType
-            + "\nResource: " + resource + ": " + resourcesGenerated
-            + "\n" + resource + " remaining: " + resourcesRemaining;
     }
 }

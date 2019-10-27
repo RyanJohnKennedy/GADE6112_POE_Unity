@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class WizardUnit : Unit
 {
-    public string Name
-    {
-        get { return base.name; }
-    }
-
     public int PosX
     {
         get { return base.posX; }
@@ -47,11 +42,6 @@ public class WizardUnit : Unit
         get { return base.attackRange; }
     }
 
-    public string Symbol
-    {
-        get { return base.symbol; }
-    }
-
     public Faction FactionType
     {
         get { return base.factionType; }
@@ -84,8 +74,8 @@ public class WizardUnit : Unit
     Unit closestUnit;
 
     //Constructor that sends all parameters to the unit constructor
-    public WizardUnit(string n, int x, int y, Faction faction, int hp, int sp, int att, int attRange, string sym, bool isAtt)
-        : base(n, x, y, hp, sp, att, attRange, sym, faction, isAtt)
+    public WizardUnit(int x, int y, Faction faction, int hp, int sp, int att, int attRange, bool isAtt)
+        : base(x, y, hp, sp, att, attRange, faction, isAtt)
     {
         factionType = Faction.Neutral;
     }
@@ -368,19 +358,5 @@ public class WizardUnit : Unit
         {
             return false;
         }
-    }
-
-    //Returns the units information
-    public override string ToString()
-    {
-        return Name + "\nX: " + PosX
-            + " Y: " + PosY
-            + "\nMax Health: " + MaxHealth
-            + "\nHealth: " + Health
-            + "\nSpeed: " + Speed
-            + "\nAttack Damage " + Attack
-            + "\nAttack Range: " + AttackRange
-            + "\nFaction: " + FactionType
-            + "\nAttacking: " + IsAttacking;
     }
 }

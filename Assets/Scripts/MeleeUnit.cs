@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class MeleeUnit : Unit
 {
-    public string Name
-    {
-        get { return base.name; }
-    }
-
     public int PosX
     {
         get { return base.posX; }
@@ -51,12 +46,6 @@ public class MeleeUnit : Unit
         set { base.attackRange = value; }
     }
 
-    public string Symbol
-    {
-        get { return base.symbol; }
-        set { base.symbol = value; }
-    }
-
     public Faction FactionType
     {
         get { return base.factionType; }
@@ -92,8 +81,8 @@ public class MeleeUnit : Unit
     Building closestBuilding;
 
     //Constructor that sends all parameters to the unit constructor
-    public MeleeUnit(string n, int x, int y, Faction faction, int hp, int sp, int att, int attRange, string sym, bool isAtt)
-        : base(n, x, y, hp, sp, att, attRange, sym, faction, isAtt)
+    public MeleeUnit(int x, int y, Faction faction, int hp, int sp, int att, int attRange, bool isAtt)
+        : base(x, y, hp, sp, att, attRange, faction, isAtt)
     {
 
     }
@@ -494,19 +483,5 @@ public class MeleeUnit : Unit
         {
             return false;
         }
-    }
-
-    //Returns the units information
-    public override string ToString()
-    {
-        return Name + "\nX: " + PosX
-            + " Y: " + PosY
-            + "\nMax Health: " + MaxHealth
-            + "\nHealth: " + Health
-            + "\nSpeed: " + Speed
-            + "\nAttack Damage " + Attack
-            + "\nAttack Range: " + AttackRange
-            + "\nFaction: " + FactionType
-            + "\nAttacking: " + IsAttacking;
     }
 }
