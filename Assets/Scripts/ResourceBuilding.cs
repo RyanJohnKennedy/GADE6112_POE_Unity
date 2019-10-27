@@ -37,6 +37,11 @@ public class ResourceBuilding : Building
         get { return resourcesGenerated; }
     }
 
+    public int ResresourcesLeft
+    {
+        get { return resourcesRemaining; }
+    }
+
     private ResourceType resource;
     private int resourcesGenerated = 0;
     private int resourcesPerRound;

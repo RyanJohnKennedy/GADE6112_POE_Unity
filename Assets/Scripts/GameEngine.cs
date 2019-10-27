@@ -20,17 +20,25 @@ public class GameEngine : MonoBehaviour
     public Text txtDireResourseGathered;
     public Text txtDireUnits;
 
+    public Text txtWinText;
+
     //Variables that can be adjusted by the user to change the map size
     const int mapHeight = 20;
     const int mapWidth = 20;
 
     //Variables to indacate how many resources each team has
     int direResources = 0;
+    int direResourcesLeft;
+
     int radientResources = 0;
+    int radientResourcesLeft;
 
     //Variables to adjust how many units and buildings will spawn
     static int unitNum = 8;
     static int buildingNum = 6;
+
+    int dire = 0;
+    int radiant = 0;
 
     //Map object
     Map m = new Map(unitNum, buildingNum, mapHeight, mapWidth);
@@ -50,8 +58,21 @@ public class GameEngine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Display();
         m.GenerateBattlefeild();
+
+        foreach (ResourceBuilding RB in m.mines)
+        {
+            if (RB.FactionType == Faction.Dire)
+            {
+                direResourcesLeft += RB.ResresourcesLeft;
+            }
+            else if (RB.FactionType == Faction.Radient)
+            {
+                radientResourcesLeft += RB.ResresourcesLeft;
+            }
+        }
+
+        Display();
         InisialiseMap();
         m.PlaceUnits();
         m.PlaceBuildings();
@@ -102,80 +123,159 @@ public class GameEngine : MonoBehaviour
     {
         Display();
 
+        //Working out if both teams are alive
+        dire = 0;
+        radiant = 0;
+
         foreach (ResourceBuilding RB in m.mines)
         {
             if (RB.FactionType == Faction.Dire)
             {
-                direResources += RB.GenerateResource();
+                dire++;
             }
-            else if (RB.FactionType == Faction.Radient)
+            else
             {
-                radientResources += RB.GenerateResource();
+                radiant++;
             }
         }
 
         foreach (FactoryBuilding FB in m.factories)
         {
-            Unit u = FB.SpawnUnit();
-
-            if (FB.FactionType == Faction.Dire && direResources > FB.SpawnCost)
+            if (FB.FactionType == Faction.Dire)
             {
-                if (m.round % FB.SpawnSpeed == 0)
-                {
-                    m.units.Add(u);
-
-                    if (u is MeleeUnit)
-                    {
-                        MeleeUnit M = (MeleeUnit)u;
-
-                        M.MapHeight = mapHeight;
-                        M.MapWidth = mapWidth;
-                        m.meleeUnits.Add(M);
-                    }
-                    else if (u is RangedUnit)
-                    {
-                        RangedUnit R = (RangedUnit)u;
-
-                        R.MapHeight = mapHeight;
-                        R.MapWidth = mapWidth;
-                        m.rangedUnits.Add(R);
-                    }
-                    direResources -= FB.SpawnCost;
-                }
+                dire++;
             }
-            else if (FB.FactionType == Faction.Radient && radientResources > FB.SpawnCost)
+            else
             {
-                if (m.round % FB.SpawnSpeed == 0)
-                {
-                    m.units.Add(u);
-
-                    if (u is MeleeUnit)
-                    {
-                        MeleeUnit M = (MeleeUnit)u;
-
-                        m.meleeUnits.Add(M);
-                    }
-                    else if (u is RangedUnit)
-                    {
-                        RangedUnit R = (RangedUnit)u;
-
-                        m.rangedUnits.Add(R);
-                    }
-                    radientResources -= FB.SpawnCost;
-                }
+                radiant++;
             }
         }
 
-        foreach (Unit u in m.units)
+        foreach (MeleeUnit u in m.meleeUnits)
         {
-            u.CheckAttackRange(m.units, m.buildings);
+            if (u.FactionType == Faction.Dire)
+            {
+                dire++;
+            }
+            else
+            {
+                radiant++;
+            }
         }
 
-        m.round++;
-        CheckDeath();
-        m.PlaceUnits();
-        m.PlaceBuildings();
-        PlaceGameObjects();
+        foreach (RangedUnit u in m.rangedUnits)
+        {
+            if (u.FactionType == Faction.Dire)
+            {
+                dire++;
+            }
+            else
+            {
+                radiant++;
+            }
+        }
+
+
+        if (dire > 0 && radiant > 0)//Checks to see if both teams are still alive
+        {
+            //Reset resource values
+            direResourcesLeft = 0;
+            radientResourcesLeft = 0;
+
+            foreach (ResourceBuilding RB in m.mines)
+            {
+                if (RB.FactionType == Faction.Dire)
+                {
+                    direResources += RB.GenerateResource();
+                    direResourcesLeft += RB.ResresourcesLeft;
+                }
+                else if (RB.FactionType == Faction.Radient)
+                {
+                    radientResources += RB.GenerateResource();
+                    radientResourcesLeft += RB.ResresourcesLeft;
+                }
+            }
+
+            foreach (FactoryBuilding FB in m.factories)
+            {
+                Unit u = FB.SpawnUnit();
+
+                if (FB.FactionType == Faction.Dire && direResources > FB.SpawnCost)
+                {
+                    if (m.round % FB.SpawnSpeed == 0)
+                    {
+                        m.units.Add(u);
+
+                        if (u is MeleeUnit)
+                        {
+                            MeleeUnit M = (MeleeUnit)u;
+
+                            M.MapHeight = mapHeight;
+                            M.MapWidth = mapWidth;
+                            m.meleeUnits.Add(M);
+                        }
+                        else if (u is RangedUnit)
+                        {
+                            RangedUnit R = (RangedUnit)u;
+
+                            R.MapHeight = mapHeight;
+                            R.MapWidth = mapWidth;
+                            m.rangedUnits.Add(R);
+                        }
+                        direResources -= FB.SpawnCost;
+
+                    }
+                }
+                else if (FB.FactionType == Faction.Radient && radientResources > FB.SpawnCost)
+                {
+                    if (m.round % FB.SpawnSpeed == 0)
+                    {
+                        m.units.Add(u);
+
+                        if (u is MeleeUnit)
+                        {
+                            MeleeUnit M = (MeleeUnit)u;
+
+                            m.meleeUnits.Add(M);
+                        }
+                        else if (u is RangedUnit)
+                        {
+                            RangedUnit R = (RangedUnit)u;
+
+                            m.rangedUnits.Add(R);
+                        }
+                        radientResources -= FB.SpawnCost;
+                    }
+                }
+            }
+
+            foreach (Unit u in m.units)
+            {
+                u.CheckAttackRange(m.units, m.buildings);
+            }
+
+            m.round++;
+            CheckDeath();
+            m.PlaceUnits();
+            m.PlaceBuildings();
+            PlaceGameObjects();
+        }
+        else
+        {
+            m.PlaceUnits();
+            m.PlaceBuildings();
+            PlaceGameObjects();
+            runGame = false;
+
+            if (dire > radiant)
+            {
+                txtWinText.text = "Dire Wins!";
+            }
+            else
+            {
+                txtWinText.text = "Radient Wins!";
+            }
+        }
     }
 
     public void CheckDeath()
@@ -330,7 +430,14 @@ public class GameEngine : MonoBehaviour
     public void Display()
     {
         txtRound.text = "Round: " + m.round;
-        
 
+        txtDireResourseGathered.text = "Resources Gathered: \n\t" + direResources;
+        txtRadientResourseGathered.text = "Resources Gathered: \n\t" + radientResources;
+
+        txtDireResourseLeft.text = "Resources Left: \n\t" + direResourcesLeft;
+        txtRadientResourseLeft.text = "Resources Left: \n\t" + radientResourcesLeft;
+
+        txtDireUnits.text = "Units Alive: \n\t" + dire;
+        txtRadientUnits.text = "Units Alive: \n\t" + radiant;
     }
 }
