@@ -23,6 +23,8 @@ public class GameEngine : MonoBehaviour
 
     public Text txtWinText;
 
+    public UnitController unit;
+
     //Variables that can be adjusted by the user to change the map size
     const int mapHeight = 20;
     const int mapWidth = 20;
@@ -89,10 +91,10 @@ public class GameEngine : MonoBehaviour
             if (gameTick == 20)
             {
                 GameLogic();
-                InisialiseMap();
-                m.PlaceUnits();
-                m.PlaceBuildings();
-                PlaceGameObjects();
+                //InisialiseMap();
+                //m.PlaceUnits();
+                //m.PlaceBuildings();
+                //PlaceGameObjects();
 
                 gameTick = 0;
             }
@@ -264,12 +266,14 @@ public class GameEngine : MonoBehaviour
 
             m.round++;
             CheckDeath();
+            InisialiseMap();
             m.PlaceUnits();
             m.PlaceBuildings();
             PlaceGameObjects();
         }
         else
         {
+            InisialiseMap();
             m.PlaceUnits();
             m.PlaceBuildings();
             PlaceGameObjects();
@@ -400,38 +404,120 @@ public class GameEngine : MonoBehaviour
                 else if (m.mapTiles[x, z] == Tiles.meleeUnitDire)
                 {
                     GameObject GO = Instantiate(meleeUnitDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach(MeleeUnit u in m.meleeUnits)
+                    {
+                        if(u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.meleeUnitRadient)
                 {
                     GameObject GO = Instantiate(meleeUnitRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (MeleeUnit u in m.meleeUnits)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.rangedUnitDire)
                 {
                     GameObject GO = Instantiate(rangedUnitDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (RangedUnit u in m.rangedUnits)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.rangedUnitRadient)
                 {
                     GameObject GO = Instantiate(rangedUnitRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (RangedUnit u in m.rangedUnits)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.wizardUnitNeutral)
                 {
                     GameObject GO = Instantiate(wizardUnitNeutral, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (WizardUnit u in m.wizardUnits)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.factoryBuildingDire)
                 {
                     GameObject GO = Instantiate(factoryBuildingDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (FactoryBuilding u in m.factories)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.factoryBuildingRadient)
                 {
                     GameObject GO = Instantiate(factoryBuildingRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (FactoryBuilding u in m.factories)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.resourceBuildingDire)
                 {
                     GameObject GO = Instantiate(resourceBuildingDire, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (ResourceBuilding u in m.mines)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
                 else if (m.mapTiles[x, z] == Tiles.resourceBuildingRadient)
                 {
                     GameObject GO = Instantiate(resourceBuildingRadient, new Vector3(x, 0.5f, z), Quaternion.identity);
+                    unit = GO.GetComponent<UnitController>();
+
+                    foreach (ResourceBuilding u in m.mines)
+                    {
+                        if (u.PosX == z && u.PosY == x)
+                        {
+                            unit.SetHealth(u.Health);
+                        }
+                    }
                 }
             }
         }
