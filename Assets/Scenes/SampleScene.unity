@@ -1298,6 +1298,7 @@ MonoBehaviour:
   txtDireResourseGathered: {fileID: 465412287}
   txtDireUnits: {fileID: 2029309584}
   txtWinText: {fileID: 1722057598}
+  unit: {fileID: 0}
   emptyTile: {fileID: 642924141094320408, guid: 010d0431e9c75e54fa3c4dabe6856472,
     type: 3}
   meleeUnitDire: {fileID: 2508403647418421125, guid: e31cd9f1124661e46917a4ac1f57ab1b,
